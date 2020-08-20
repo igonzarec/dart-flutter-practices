@@ -4,7 +4,7 @@ import 'dart:convert';
 
 class _MenuProvider {
   List<dynamic> opciones = [];
-  _MenuProvider() {}
+  _MenuProvider();
 
   Future<List<dynamic>> cargarData() async {
     final resp = await rootBundle.loadString('data/menu_opts.json');
