@@ -4,7 +4,7 @@ import 'package:formvalidation/src/blocs/provider.dart';
 import 'package:formvalidation/src/providers/usuario_provider.dart';
 import 'package:formvalidation/src/utils/utils.dart';
 
-class LoginPage extends StatelessWidget {
+class RegistroPage extends StatelessWidget {
   final usuarioProvider = new UsuarioProvider();
 
   @override
@@ -22,7 +22,7 @@ class LoginPage extends StatelessWidget {
     final fondoMorado = Container(
       height: size.height * 0.4,
       width: double.infinity,
-      color: Colors.deepPurple,
+      color: Colors.black38,
     );
 
     final circulo = Container(
@@ -66,7 +66,7 @@ class LoginPage extends StatelessWidget {
                 height: 10.0,
                 width: double.infinity,
               ),
-              Text('Iván González',
+              Text('Nuevo usuario',
                   style: TextStyle(color: Colors.white, fontSize: 25.0))
             ],
           ),
@@ -103,7 +103,7 @@ class LoginPage extends StatelessWidget {
             child: Column(
               children: [
                 Text(
-                  'Ingreso',
+                  'Crear cuenta',
                   style: TextStyle(fontSize: 20.0),
                 ),
                 SizedBox(
@@ -124,8 +124,8 @@ class LoginPage extends StatelessWidget {
               ],
             )),
         FlatButton(
-          child: Text('Crear una nueva cuenta'),
-          onPressed: () => Navigator.pushReplacementNamed(context, 'registro'),
+          child: Text('¿Ya tienes cuenta?'),
+          onPressed: () => Navigator.pushReplacementNamed(context, 'login'),
         )
       ]),
     );
@@ -140,7 +140,7 @@ class LoginPage extends StatelessWidget {
           child: TextField(
             keyboardType: TextInputType.emailAddress,
             decoration: InputDecoration(
-                icon: Icon(Icons.alternate_email, color: Colors.deepPurple),
+                icon: Icon(Icons.alternate_email, color: Colors.black38),
                 hintText: 'ejemplo@correo.com',
                 labelText: 'correo electrónico',
                 counterText: snapshot.data,
@@ -162,7 +162,7 @@ class LoginPage extends StatelessWidget {
               obscureText: true,
               keyboardType: TextInputType.emailAddress,
               decoration: InputDecoration(
-                icon: Icon(Icons.lock_outline, color: Colors.deepPurple),
+                icon: Icon(Icons.lock_outline, color: Colors.black38),
                 labelText: 'Contraseña',
                 counterText: snapshot.data,
                 errorText: snapshot.error,
@@ -183,7 +183,7 @@ class LoginPage extends StatelessWidget {
         return RaisedButton(
           child: Container(
             padding: EdgeInsets.symmetric(horizontal: 80.0, vertical: 15.0),
-            child: Text('Ingresar'),
+            child: Text('Crear cuenta'),
           ),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(5.0),
@@ -191,15 +191,15 @@ class LoginPage extends StatelessWidget {
           elevation: 0.0,
           color: Colors.deepPurple,
           textColor: Colors.white,
-          onPressed: snapshot.hasData ? () => _login(bloc, context) : null,
+          onPressed: snapshot.hasData ? () => _register(bloc, context) : null,
         );
       },
     );
   }
 
-  _login(LoginBloc bloc, BuildContext context) async {
-    Map info = await usuarioProvider.login(bloc.email, bloc.password);
-
+  _register(LoginBloc bloc, BuildContext context) async {
+    final info = await usuarioProvider.nuevoUsuario(bloc.email, bloc.password);
+    // Navigator.pushReplacementNamed(context, 'home');
     if (info['ok']) {
       Navigator.pushReplacementNamed(context, 'home');
     } else {
