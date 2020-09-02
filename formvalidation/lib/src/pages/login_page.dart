@@ -18,11 +18,7 @@ class LoginPage extends StatelessWidget {
     final fondoMorado = Container(
       height: size.height * 0.4,
       width: double.infinity,
-      decoration: BoxDecoration(
-          gradient: LinearGradient(colors: [
-        Color.fromRGBO(63, 63, 156, 1.0),
-        Color.fromRGBO(90, 70, 178, 1.0)
-      ])),
+      color: Colors.deepPurple,
     );
 
     final circulo = Container(
